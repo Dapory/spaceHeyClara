@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clara's Links</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset de márgenes y paddings para pegar el contenido al borde */
+    body {
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centrar todo el contenido horizontalmente */
+      text-align: center; /* Centrar el texto */
+
+      /* ESTILOS PARA EL FONDO GIF (se asigna la URL desde JS) */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* Contenedor principal para el contenido */
+    .main-content-container {
+      padding: 1.5rem; /* Padding general para el contenido (equivalente a p-6) */
+      width: 100%; /* Ocupa todo el ancho disponible */
+      max-width: 480px; /* Ancho máximo para el contenido central */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative; /* ¡CLAVE! Permite posicionar elementos absolutos dentro de él */
+      overflow: hidden; /* Ayuda a que los elementos que se salen no creen scrollbars */
+    }
+
+    .custom-font {
+      font-family: 'Pacifico', cursive;
+    }
+    .link-button {
+      transition: transform 0.2s;
+    }
+    .link-button:hover {
+      transform: scale(1.05);
+    }
+    /* Estilo para el brillo alrededor de la foto de perfil */
+    #profile-pic {
+      box-shadow: 0 0 15px 7px rgba(255, 255, 0, 0.7),
+                  0 0 30px 15px rgba(255, 215, 0, 0.3);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    #profile-pic:hover {
+      box-shadow: 0 0 20px 10px rgba(255, 255, 0, 0.9),
+                  0 0 40px 20px rgba(255, 215, 0, 0.5);
+    }
+
+    /* ESTILOS PARA EL TEXTO (blanco con sombra para legibilidad) */
+    #name, #bio, footer {
+      color: #FFFFFF;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    #bio {
+      background-color: rgba(0, 0, 0, 0.2);
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+    }
+    .link-button {
+      color: #FFFFFF !important;
+    }
+
+    /* ESTILOS PARA EL MINIBANNER */
+    #minibanner {
+      width: 90%;
+      max-width: 400px;
+      height: 150px;
+      background: url('imagenes/bannerClara.gif') center/cover no-repeat; /* Asegúrate de que la ruta sea correcta */
+      margin: 15px auto;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* NUEVOS ESTILOS PARA LA IMAGEN cc1.png */
+    #cc1-image {
+      position: absolute;
+      width: 200px; /* Tamaño más grande para ver mejor el efecto, ajusta si es necesario */
+      top: 167px; /* ¡CLAVE! Ajusta este valor para mover la chica verticalmente */
+      left: 50%; /* Intenta centrarla horizontalmente */
+      transform: translateX(-50%); /* Ajuste para centrarla perfectamente */
+      z-index: 10; /* Asegura que esté por encima del banner */
+      /* Puedes añadir otros estilos si quieres, como border-radius o box-shadow */
+    }
+
+    /* Para que el banner no quede cubierto por la imagen cc1.png */
+    /* Ajusta el margen superior del bloque de enlaces si la imagen cc1.png lo cubre */
+    #links {
+        margin-top: 50px; /* Mantén este margen para dar espacio entre la bio/foto y los enlaces */
+    }
+  </style>
+</head>
+<body id="body">
+  <div class="main-content-container">
+    <img id="profile-pic" src="" alt="Foto de perfil" class="rounded-full w-32 h-32 border-4 border-white shadow-md" />
+    <h1 id="name" class="text-3xl mt-4 font-bold custom-font"></h1>
+    <p id="bio" class="text-sm mt-2 text-gray-600"></p>
+
+    <img id="cc1-image" src="imagenes/cc1.png" alt="Chica acostada">
+
+    <div id="links" class="mt-6 space-y-3 w-full max-w-xs"></div>
+
+    <div id="extras" class="mt-6 space-y-4">
+      <div id="minibanner"></div>
+    </div>
+
+    <footer class="mt-10 text-xs text-gray-500">
+      Hecho con ❤️ por Clara
+    </footer>
+  </div>
+
+  <script>
+    const data = {
+        // Rutas de las imágenes (CRÍTICO: Deben estar en la carpeta 'imagenes/' junto a index.html)
+        fondo: 'url("imagenes/fondoPagina.gif")',
+        foto: 'imagenes/fotoClara.jpg',
+
+        nombre: 'CHOPED OF CLARA',
+        bio: '¡Hola! Soy Clara y estoy MUYYYYY CHOPED.',
+        links: [
+            { texto: 'Ejemplo 1', url: 'https://www.instagram.com/clarixlp/', color: 'bg-pink-500 hover:bg-pink-600' },
+            { texto: 'Ejemplo 2', url: 'https://twitter.com/clara', color: 'bg-blue-500 hover:bg-blue-600' },
+            { texto: 'Ejemplo 3', url: 'https://www.clara.com/portfolio', color: 'bg-purple-500 hover:bg-purple-600' }
+        ],
+        imagenes: [
+            'imagenes/miku.png' // Esta imagen se añadirá después del banner
+        ]
+    };
+
+    document.getElementById('body').style.background = data.fondo;
+    document.getElementById('profile-pic').src = data.foto;
+    document.getElementById('name').textContent = data.nombre;
+    document.getElementById('bio').textContent = data.bio;
+
+    const linksContainer = document.getElementById('links');
+    data.links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link.url;
+      a.textContent = link.texto;
+      a.target = '_blank';
+      a.className = `block py-3 rounded-xl shadow-md text-white link-button ${link.color}`;
+      linksContainer.appendChild(a);
+    });
+
+    const extras = document.getElementById('extras');
+    data.imagenes.forEach(imgUrl => {
+      const img = document.createElement('img');
+      img.src = imgUrl;
+      if (imgUrl === 'imagenes/miku.png') {
+        img.className = 'w-full';
+      } else {
+        img.className = 'rounded-xl shadow-md w-full';
+      }
+      extras.appendChild(img);
+    });
+  </script>
+</body>
+</html>
